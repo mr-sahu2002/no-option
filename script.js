@@ -2,13 +2,23 @@ const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 const message = document.getElementById("message");
 
-noBtn.addEventListener("mouseover", () => {
-  const x = Math.random() * 200 - 100;
-  const y = Math.random() * 100 - 50;
+function moveNoButton() {
+  const maxX = window.innerWidth - noBtn.offsetWidth - 40;
+  const maxY = 120;
 
-  noBtn.style.transform = `translate(${x}px, ${y}px)`;
-});
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY;
+
+  noBtn.style.left = `${x}px`;
+  noBtn.style.top = `${y}px`;
+}
+
+// Desktop
+noBtn.addEventListener("mouseover", moveNoButton);
+
+// Mobile
+noBtn.addEventListener("touchstart", moveNoButton);
 
 yesBtn.addEventListener("click", () => {
-  message.textContent = "Yay! 💖 Happy Valentine’s Day! I love you 😘";
+  message.textContent = "Yay! 💖 Happy Valentine’s Day! 😘";
 });
