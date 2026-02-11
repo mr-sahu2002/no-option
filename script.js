@@ -1,24 +1,60 @@
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
+document.addEventListener("DOMContentLoaded", () => {
+  // Get elements
+  const noBtn = document.getElementById("noBtn");
+  const yesBtn = document.getElementById("yesBtn");
+  const message = document.getElementById("message");
+  const celebration = document.getElementById("celebration");
+  const loveSong = document.getElementById("loveSong");
+  const buttonsContainer = document.querySelector(".buttons");
 
-function moveNoButton() {
-  const maxX = window.innerWidth - noBtn.offsetWidth - 40;
-  const maxY = 120;
+  // Safety check
+  if (!noBtn || !yesBtn || !message || !buttonsContainer) {
+    console.error("Required elements missing in HTML");
+    return;
+  }
 
-  const x = Math.random() * maxX;
-  const y = Math.random() * maxY;
+  // Move the "No" button randomly
+  function moveNoButton() {
+    const container = document.querySelector(".container");
+    const containerRect = container.getBoundingClientRect();
 
-  noBtn.style.left = `${x}px`;
-  noBtn.style.top = `${y}px`;
-}
+    const maxX = containerRect.width - noBtn.offsetWidth;
+    const maxY = 120;
 
-// Desktop
-noBtn.addEventListener("mouseover", moveNoButton);
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
 
-// Mobile
-noBtn.addEventListener("touchstart", moveNoButton);
+    noBtn.style.left = `${x}px`;
+    noBtn.style.top = `${y}px`;
+  }
 
-yesBtn.addEventListener("click", () => {
-  message.textContent = "Yay! 💖 Happy Valentine’s Day! 😘";
+  // Desktop hover
+  noBtn.addEventListener("mouseover", moveNoButton);
+
+  // Mobile touch
+  noBtn.addEventListener("touchstart", (e) => {
+    e.preventDefault();
+    moveNoButton();
+  });
+
+  // YES button logic
+  yesBtn.addEventListener("click", () => {
+    // Update text
+    message.textContent = "Yay! I knew you'd say yes! ❤️";
+
+    // Show GIF
+    if (celebration) {
+      celebration.classList.remove("hidden");
+    }
+
+    // Play music
+    if (loveSong) {
+      loveSong.volume = 0.6;
+      loveSong.currentTime = 0;
+      loveSong.play().catch(() => {});
+    }
+
+    // 🔥 Remove the entire buttons container (NO extra space)
+    buttonsContainer.style.display = "none";
+  });
 });
