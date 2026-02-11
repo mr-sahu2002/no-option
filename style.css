@@ -64,3 +64,18 @@ button {
   color: #ff4d6d;
   font-weight: bold;
 }
+
+.hidden {
+  display: none;
+}
+
+#celebration {
+  margin-top: 20px;
+}
+
+.love-gif {
+  width: 100%;
+  max-width: 260px;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
